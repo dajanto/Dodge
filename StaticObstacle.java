@@ -10,12 +10,17 @@ public class StaticObstacle extends GameObject {
 
 	@Override
 	public void update() {
-
+		
 	}
 
 	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(_x, _y, Game._width/8, Game._height);
+	}
+
+	@Override
+	public void doCollision() {
+		// TODO
 	}
 }

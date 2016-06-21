@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
@@ -9,15 +10,22 @@ public abstract class GameObject {
 	protected int _velX;
 	protected int _velY;
 	
+	protected Color color;
+	protected boolean collided;
+	
 	public GameObject(int x, int y, ID id) {
 		this._x = x;
 		this._y = y;
 		this._id = id;
+		
+		collided = false;
 	}
 
 	public abstract void update();
 	
 	public abstract void render(Graphics g);
+	
+	public abstract void doCollision();
 	
 	public void setX(int x) {
 		this._x = x;

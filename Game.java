@@ -18,37 +18,38 @@ public class Game extends Canvas implements Runnable {
 	public Game() {
 	
 		new Window(_width, _height, "dajanto JNR", this);
+		
 		_handler = new Handler();
 		this.addKeyListener(new KeyInput(_handler));
 
 		// Add objects (Player, obstacles)
 		spawnStaticObstacles();
-		spawnMovingObstacles1();
 		spawnPlayer();
+		spawnMovingObstacles1();
 	}
 	
 	public void spawnStaticObstacles() {
-		
-		_handler.addObject(new StaticObstacle(0, 0, ID.Obstacle));
-		_handler.addObject(new StaticObstacle(Game._width - Game._width/8, 0, ID.Obstacle));
+		_handler.addObject(new StaticObstacle(0, 0, ID.StaticObstacleType1));
+		_handler.addObject(new StaticObstacle(Game._width - Game._width/8, 0, ID.StaticObstacleType1));
 		
 	}
 	
 	public void spawnMovingObstacles1() {
-		for(int i = 100000; i > 0; i = i - 600) {
-			_handler.addObject(new MovingObstacleType1(Game._width/8, -i, ID.Obstacle));
+		
+		for(int i = 0; i < 750; i = i + 50) {
+			_handler.addObject(new MovingObstacleType1(Game._width/8, -i - 100, ID.MovingObstacleType1));
 		}
 	}
 	
 	public void spawnPlayer() {
 		
-		_handler.addObject(new Player(450, 800, ID.Player));
+		_handler.addObject(new Player(450, 800, ID.Player1));
 		
 	}
 	
-	public static void main(String[] args) {
-		new Game();
-	}
+//	public static void main(String[] args) {
+//		new Game();
+//	}
 
 	@Override
 	public void run() {
@@ -100,6 +101,7 @@ public class Game extends Canvas implements Runnable {
 		g.fillRect(0, 0, _width, _height);
 		
 		_handler.render(g);
+		_handler.collisionDetection();
 		
 		g.dispose();
 		bs.show();

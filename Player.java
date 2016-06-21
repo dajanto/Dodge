@@ -15,26 +15,31 @@ public class Player extends GameObject {
 		_x += _velX;
 		_y += _velY;
 		
-		System.out.println("x: " + _x);
-		System.out.println("y: " + _y);
-		// Limit movement
+		// Limit player movement concerning the static obstacles
+		// x
 		if(_x <= 120) {
-			_x++;
+			_x = 125;
 		} else if(_x >= Game._width - Game._width/8 - 32) {
-			_x--;
+			_x = Game._width - Game._width/8 - 32;
+		}
+		// y
+		if(_y <= 0) {
+			_y = 0;
+		} else if(_y >= Game._height - 60) {
+			_y = Game._height - 60;
 		}
 		
-		if(_y <= 100) {
-			_y++;
-		} else if(_y >= Game._height + 100) {
-			_y--;
-		}
 		
 	}
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.RED);
+		g.setColor(Color.MAGENTA);
 		g.fillRect(_x, _y, 32, 32);
+	}
+
+	@Override
+	public void doCollision() {
+		// TODO
 	}
 }

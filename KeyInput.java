@@ -16,13 +16,12 @@ public class KeyInput extends KeyAdapter {
 		for(int i = 0; i < _handler.object.size(); i++) {
 			GameObject tempObject = _handler.object.get(i);
 			
-			if(tempObject.getID() == ID.Player) {
+			if(tempObject.getID() == ID.Player1) {
 				
-				if(key == KeyEvent.VK_UP) tempObject.setVelY(-6);
-				if(key == KeyEvent.VK_DOWN) tempObject.setVelY(+6);
-				if(key == KeyEvent.VK_LEFT) tempObject.setVelX(-6);
-				if(key == KeyEvent.VK_RIGHT) tempObject.setVelX(+6);
-				
+				if(key == KeyEvent.VK_UP) tempObject.setVelY(-10);
+				if(key == KeyEvent.VK_DOWN) tempObject.setVelY(+10);
+				if(key == KeyEvent.VK_LEFT) tempObject.setVelX(-10);
+				if(key == KeyEvent.VK_RIGHT) tempObject.setVelX(+10);
 			}
 		}
 	}
@@ -34,7 +33,7 @@ public class KeyInput extends KeyAdapter {
 		for(int i = 0; i < _handler.object.size(); i++) {
 			GameObject tempObject = _handler.object.get(i);
 			
-			if(tempObject.getID() == ID.Player) {
+			if(tempObject.getID() == ID.Player1) {
 				
 				if(key == KeyEvent.VK_UP) tempObject.setVelY(0);
 				if(key == KeyEvent.VK_DOWN) tempObject.setVelY(0);

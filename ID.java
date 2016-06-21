@@ -1,5 +1,7 @@
 
 public enum ID {
-	Player(),
-	Obstacle();
+	Player1(),
+	MovingObstacleType1(),
+	MovingObstacleType2(),
+	StaticObstacleType1();
 }

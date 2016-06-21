@@ -19,8 +19,12 @@ public class Window extends Canvas {
 		frame.setResizable(false);
 		frame.add(game);
 		frame.setVisible(true);
+		
+		frame.pack();
 		frame.setFocusable(true);
 		frame.requestFocus();
+		
+		
 		
 		game.start();
 	}

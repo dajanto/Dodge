@@ -24,4 +24,9 @@ public class MovingObstacleType2 extends GameObject {
 		g.setColor(Color.BLACK);
 		g.fillRect(_x, _y, 50, 50);
 	}
+
+	@Override
+	public void doCollision() {
+		// TODO
+	}
 }
