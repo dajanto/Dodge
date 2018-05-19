@@ -52,7 +52,7 @@ public class Player extends GameObject {
 		
 //		System.out.println("Player colliding...");
 		collided = true;
-		canJump = true;
-		canFall = false;
+		
+		setVelX(0);
 	}
 }

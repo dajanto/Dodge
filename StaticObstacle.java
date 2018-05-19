@@ -27,7 +27,5 @@ public class StaticObstacle extends GameObject {
 //		System.out.println("Static Obstacle colliding...");
 		
 		collided = true;
-		canJump = true;
-		canFall = false;
 	}
 }

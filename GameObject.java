@@ -6,23 +6,15 @@ public abstract class GameObject {
 	
 	protected int _x;
 	protected int _y;
-	
-	protected int _velX;
-	protected int _velY;
-	
+	protected double _velX;
+	protected double _velY;
 	protected int _width;
 	protected int _height;
-	
 	protected ID _id;
-	
 	protected Color color;
 	protected boolean collided;
-
 	protected int jumpheight = 100;
-	protected int gravity;
-	
-	protected boolean canFall;
-	protected boolean canJump;
+	protected double gravity;
 	
 	public GameObject(int x, int y, int width, int height, ID id) {
 		this._x = x;
@@ -31,11 +23,8 @@ public abstract class GameObject {
 		this._width = width;
 		this._height = height;
 		
-		gravity = 3;
+		gravity = 10;
 		collided = false;
-		
-		canJump = false;
-		canFall = true;
 	}
 
 	public abstract void update();
@@ -52,9 +41,9 @@ public abstract class GameObject {
 	
 	public void jump() {
 		
-		setVelX(10);
-		setVelY(-100);
-		
+//		setVelX(1.25);
+		setVelY(-150);
+			
 	}
 	
 	public void fall() {
@@ -97,19 +86,19 @@ public abstract class GameObject {
 		return _id;
 	}
 	
-	public int getVelX() {
+	public double getVelX() {
 		return _velX;
 	}
 	
-	public int getVelY() {
+	public double getVelY() {
 		return _velY;
 	}
 	
-	public void setVelX(int x) {
+	public void setVelX(double x) {
 		this._velX = x;
 	}
 	
-	public void setVelY(int y) {
+	public void setVelY(double y) {
 		this._velY = y;
 	}
 
