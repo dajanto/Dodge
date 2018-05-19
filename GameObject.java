@@ -23,7 +23,7 @@ public abstract class GameObject {
 		this._width = width;
 		this._height = height;
 		
-		gravity = 10;
+		gravity = 2.5;
 		collided = false;
 	}
 
@@ -41,8 +41,8 @@ public abstract class GameObject {
 	
 	public void jump() {
 		
-//		setVelX(1.25);
-		setVelY(-150);
+//		setVelX(5);
+		setVelY(-40);
 			
 	}
 	

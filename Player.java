@@ -34,8 +34,9 @@ public class Player extends GameObject {
 			_y = 0;
 		} else {
 			// 651 instead of 650 because 650 is drawn and the 1 is for collision detection
-			if(_y >= 651) {
-				_y = 651;
+			// TODO Should the player to be allowed to touch the ground?
+			if(_y >= 650) {
+				_y = 650;
 			}
 		}
 	}
@@ -44,7 +45,8 @@ public class Player extends GameObject {
 	public void render(Graphics g) {
 		
 		g.setColor(Color.MAGENTA);
-		g.fillRect(_x, _y, getWidth(), getHeight() - 1);
+		// getHeight() - 1 --> no drawing for the extra collisionn pixel
+		g.fillRect(_x, _y, getWidth(), getHeight());
 	}
 
 	@Override

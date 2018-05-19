@@ -24,33 +24,30 @@ public class Game extends Canvas implements Runnable {
 		// Spawn objects (Player, obstacles)
 		spawnStaticObstacles();
 		spawnPlayer();
-		
-		// spawnMovingObstacles1();
-		// spawnMovingObstacles2();
+		spawnMovingObstacles1();
 	}
 	
 	public void spawnStaticObstacles() {
 		
 		// Ground
-		_handler.addObject(new StaticObstacle(0, 700, 1280, 100, ID.MovingObstacleType1));
-		
-		
-		// Obstacles
-		for(int i = 0; i < 10000; i = i + 50) {
-		
-			// TODO Spawn objects
-//			_handler.addObject(new StaticObstacle(i, 50, 200, 200, ID.MovingObstacleType1));
-		}
+		_handler.addObject(new StaticObstacle(0, 700, 1280, 100, ID.StaticObstacleType1));
+
 	}
 	
 	public void spawnMovingObstacles1() {
 		
 		// TODO
 		
-//		for(int i = 0; i < 750; i = i + 50) {
-//			
-//			_handler.addObject(new MovingObstacleType1(Game._width/8, -i - 100, i, i, ID.MovingObstacleType1));
-//		}
+		// Obstacles
+		for(int i = 800; i < 10000; i = i + 400) {
+			
+			_handler.addObject(new MovingObstacleType1(i, 400, 100, 300, ID.MovingObstacleType1));
+		}
+		
+		for(int i = 800; i < 10000; i = i + 400) {
+			
+			_handler.addObject(new MovingObstacleType1(i, 0, 100, 300, ID.MovingObstacleType1));
+		}
 	}
 	
 	public void spawnPlayer() {

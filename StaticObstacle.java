@@ -12,6 +12,7 @@ public class StaticObstacle extends GameObject {
 	@Override
 	public void update() {
 		
+		
 	}
 
 	@Override
@@ -19,6 +20,11 @@ public class StaticObstacle extends GameObject {
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(_x, _y, getWidth(), getHeight());
+		
+		if(collided) {
+			g.setColor(Color.RED);
+			g.fillRect(_x, _y, getWidth(), getHeight());
+		}
 	}
 
 	@Override
