@@ -3,8 +3,8 @@ import java.awt.Graphics;
 
 public class MovingObstacleType2 extends GameObject {
 
-	public MovingObstacleType2(int x, int y, ID id) {
-		super(x, y, id);
+	public MovingObstacleType2(int x, int y, int width, int height, ID id) {
+		super(x, y, width, height, id);
 		
 	}
 
@@ -21,7 +21,7 @@ public class MovingObstacleType2 extends GameObject {
 	@Override
 	public void render(Graphics g
 			) {
-		g.setColor(Color.BLACK);
+		g.setColor(Color.RED);
 		g.fillRect(_x, _y, 50, 50);
 	}
 

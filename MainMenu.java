@@ -53,7 +53,7 @@ public class MainMenu {
 
 	private void setGUIup() {
 		
-		frame = new JFrame("dajanto JNR Main Menu");
+		frame = new JFrame("Dodge!");
 		gridlayout = new GridLayout(3, 1);
 		playButton = new JButton("Play");
 		optionsButton = new JButton("Options");

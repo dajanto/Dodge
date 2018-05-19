@@ -3,8 +3,8 @@ import java.awt.Graphics;
 
 public class MovingObstacleType1 extends GameObject {
 
-	public MovingObstacleType1(int x, int y, ID id) {
-		super(x, y, id);
+	public MovingObstacleType1(int x, int y, int width, int height, ID id) {
+		super(x, y, width, height, id);
 		
 		_velX = randomNumber(10);
 		_velY = randomNumber(5);

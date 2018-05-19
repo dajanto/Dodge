@@ -2,44 +2,57 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Player extends GameObject {
-
-	public Player(int x, int y, ID id) {
-		super(x, y, id);
-		
+	
+	public Player(int x, int y, int width, int height, ID id) {
+		super(x, y, width, height, id);
 	}
 
 	@Override
 	public void update() {
 	
-		// Creating velocity
-		_x += _velX;
-		_y += _velY;
+		// Movement
+		move();
+		
+		// Falling
+		fall();
+
+		// Coordinates for Player
+//		System.out.println("Y:" + _y);
 		
 		// Limit player movement concerning the static obstacles
 		// x
-		if(_x <= 120) {
-			_x = 125;
-		} else if(_x >= Game._width - Game._width/8 - 32) {
-			_x = Game._width - Game._width/8 - 32;
+		if(_x >= 1230) {
+			_x = 1230;
+		} else {
+			if(_x <= 0) {
+				_x = 0;
+			}
 		}
+		
 		// y
 		if(_y <= 0) {
 			_y = 0;
-		} else if(_y >= Game._height - 60) {
-			_y = Game._height - 60;
+		} else {
+			// 651 instead of 650 because 650 is drawn and the 1 is for collision detection
+			if(_y >= 651) {
+				_y = 651;
+			}
 		}
-		
-		
 	}
 
 	@Override
 	public void render(Graphics g) {
+		
 		g.setColor(Color.MAGENTA);
-		g.fillRect(_x, _y, 32, 32);
+		g.fillRect(_x, _y, getWidth(), getHeight() - 1);
 	}
 
 	@Override
 	public void doCollision() {
-		// TODO
+		
+//		System.out.println("Player colliding...");
+		collided = true;
+		canJump = true;
+		canFall = false;
 	}
 }

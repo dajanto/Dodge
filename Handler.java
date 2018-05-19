@@ -9,8 +9,6 @@ public class Handler {
 	LinkedList<GameObject> obstacleObjects = new LinkedList<GameObject>();
 	LinkedList<GameObject> playerObjects = new LinkedList<GameObject>();
 	
-	int collisionCounter;
-	
 	public void update() {
 		for (GameObject tempObject : object) {
 			tempObject.update();
@@ -27,15 +25,17 @@ public class Handler {
 		
 		for (GameObject obstacleObject : obstacleObjects) {
 			
-			GameObject playerObject = playerObjects.get(0);
-			
-			Rectangle player = new Rectangle(playerObject.getX(),playerObject.getY(),32,32);
-			Rectangle obstacle = new Rectangle(obstacleObject.getX(),obstacleObject.getY(),100,100);
-			
-			if(player.intersects(obstacle)) {
-				obstacleObject.doCollision();
-				playerObject.doCollision();
+			for (GameObject playerObject : playerObjects) {
 				
+				Rectangle player = new Rectangle(playerObject.getX(),playerObject.getY(),playerObject.getWidth(),playerObject.getHeight());
+				Rectangle obstacle = new Rectangle(obstacleObject.getX(),obstacleObject.getY(),obstacleObject.getWidth(),obstacleObject.getHeight());
+				
+				// Actual collision
+				if(player.intersects(obstacle)) {
+					
+					obstacleObject.doCollision();
+					playerObject.doCollision();
+				} 
 			}
 		}
 	}
@@ -52,7 +52,6 @@ public class Handler {
 			playerObjects.add(object);
 		}
 	}
-	
 	
 	public void removeObject(GameObject object) {
 		this.object.remove(object);

@@ -18,10 +18,38 @@ public class KeyInput extends KeyAdapter {
 			
 			if(tempObject.getID() == ID.Player1) {
 				
-				if(key == KeyEvent.VK_UP) tempObject.setVelY(-10);
-				if(key == KeyEvent.VK_DOWN) tempObject.setVelY(+10);
-				if(key == KeyEvent.VK_LEFT) tempObject.setVelX(-10);
-				if(key == KeyEvent.VK_RIGHT) tempObject.setVelX(+10);
+				// Arrow key inputs
+//				if(key == KeyEvent.VK_UP) tempObject.setVelY(-8);
+//				if(key == KeyEvent.VK_DOWN) tempObject.setVelY(+8);
+//				if(key == KeyEvent.VK_LEFT) tempObject.setVelX(-8);
+//				if(key == KeyEvent.VK_RIGHT) tempObject.setVelX(+8);
+				
+				// Jumping
+				if(key == KeyEvent.VK_SPACE) {
+					tempObject.jump();
+				}
+				
+//				if(key == KeyEvent.VK_W) {
+//					tempObject.setVelY(-30);
+//				}
+				
+//				if(key == KeyEvent.VK_S) {
+//					tempObject.setVelY(+30);
+//				}
+				
+				if(key == KeyEvent.VK_A) {
+					
+					if(!tempObject.collided) {
+						tempObject.setVelX(-20);
+					}
+				}
+				
+				if(key == KeyEvent.VK_D) {
+
+					if(!tempObject.collided) {
+						tempObject.setVelX(+20);
+					}
+				}
 			}
 		}
 	}
@@ -35,11 +63,26 @@ public class KeyInput extends KeyAdapter {
 			
 			if(tempObject.getID() == ID.Player1) {
 				
-				if(key == KeyEvent.VK_UP) tempObject.setVelY(0);
-				if(key == KeyEvent.VK_DOWN) tempObject.setVelY(0);
-				if(key == KeyEvent.VK_LEFT) tempObject.setVelX(0);
-				if(key == KeyEvent.VK_RIGHT) tempObject.setVelX(0);
+//				// Jumping
+//				if(key == KeyEvent.VK_SPACE) {
+//					tempObject.fall();
+//				}
 				
+//				if(key == KeyEvent.VK_W) {
+//					tempObject.setVelY(0);
+//				}
+				
+//				if(key == KeyEvent.VK_S) {
+//					tempObject.setVelY(0);
+//				}
+				
+				if(key == KeyEvent.VK_A) {
+					tempObject.setVelX(0);
+				}
+				
+				if(key == KeyEvent.VK_D) {
+					tempObject.setVelX(0);
+				}
 			}
 		}
 	}

@@ -3,8 +3,9 @@ import java.awt.Graphics;
 
 public class StaticObstacle extends GameObject {
 
-	public StaticObstacle(int x, int y, ID id) {
-		super(x, y, id);
+	public StaticObstacle(int x, int y, int width, int height, ID id) {
+		
+		super(x, y, width, height, id);
 		
 	}
 
@@ -15,12 +16,18 @@ public class StaticObstacle extends GameObject {
 
 	@Override
 	public void render(Graphics g) {
+		
 		g.setColor(Color.BLACK);
-		g.fillRect(_x, _y, Game._width/8, Game._height);
+		g.fillRect(_x, _y, getWidth(), getHeight());
 	}
 
 	@Override
 	public void doCollision() {
-		// TODO
+		
+//		System.out.println("Static Obstacle colliding...");
+		
+		collided = true;
+		canJump = true;
+		canFall = false;
 	}
 }

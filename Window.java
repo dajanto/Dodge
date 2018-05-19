@@ -1,6 +1,5 @@
 import java.awt.Canvas;
 import java.awt.Dimension;
-
 import javax.swing.JFrame;
 
 public class Window extends Canvas {
@@ -11,22 +10,17 @@ public class Window extends Canvas {
 		
 		JFrame frame = new JFrame(title);
 		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setPreferredSize(new Dimension(width, height));
-		frame.setBounds(450, 20, width, height);
-		frame.setMaximumSize(new Dimension(width, height));
 		frame.setMinimumSize(new Dimension(width, height));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		frame.setUndecorated(true);
 		frame.setResizable(false);
+		frame.setFocusable(false);
 		frame.add(game);
-		frame.setVisible(true);
-		
 		frame.pack();
-		frame.setFocusable(true);
-		frame.requestFocus();
 		
-		
-		
+		frame.setVisible(true);
 		game.start();
 	}
-
 }
