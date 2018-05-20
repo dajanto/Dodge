@@ -1,8 +1,8 @@
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import java.awt.GridLayout;
 import javax.swing.JFrame;
 
 public class MainMenu {
@@ -38,7 +38,8 @@ public class MainMenu {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO
+				
+				
 			}
 		});
 
@@ -46,6 +47,7 @@ public class MainMenu {
 	
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				System.exit(0);
 			}
 		});

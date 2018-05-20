@@ -31,12 +31,11 @@ public class Game extends Canvas implements Runnable {
 		
 		// Ground
 		_handler.addObject(new StaticObstacle(0, 700, 1280, 100, ID.StaticObstacleType1));
-
 	}
 	
 	public void spawnMovingObstacles1() {
 		
-		// TODO
+		// TODO 
 		
 		// Obstacles
 		for(int i = 800; i < 10000; i = i + 400) {

@@ -16,9 +16,6 @@ public class Player extends GameObject {
 		// Falling
 		fall();
 
-		// Coordinates for Player
-//		System.out.println("Y:" + _y);
-		
 		// Limit player movement concerning the static obstacles
 		// x
 		if(_x >= 1230) {

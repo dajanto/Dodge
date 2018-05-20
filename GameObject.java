@@ -41,7 +41,7 @@ public abstract class GameObject {
 	
 	public void jump() {
 		
-//		setVelX(5);
+//		setVelX(2);
 		setVelY(-40);
 			
 	}
