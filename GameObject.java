@@ -3,118 +3,120 @@ import java.awt.Graphics;
 import java.util.Random;
 
 public abstract class GameObject {
-	
-	protected int _x;
-	protected int _y;
-	protected double _velX;
-	protected double _velY;
-	protected int _width;
-	protected int _height;
-	protected ID _id;
-	protected Color color;
+
+	protected int x;
+	protected int y;
+	protected double velX;
+	protected double velY;
+	protected int width;
+	protected int height;
+	protected ID id;
 	protected boolean collided;
+	protected Color color;
 	protected int jumpheight = 100;
 	protected double gravity;
-	
+
 	public GameObject(int x, int y, int width, int height, ID id) {
-		this._x = x;
-		this._y = y;
-		this._id = id;
-		this._width = width;
-		this._height = height;
 		
-		gravity = 2.5;
+		this.x = x;
+		this.y = y;
+		this.id = id;
+		this.width = width;
+		this.height = height;
+
 		collided = false;
+		gravity = 2.5;
 	}
 
 	public abstract void update();
-	
+
 	public abstract void render(Graphics g);
-	
+
 	public abstract void doCollision();
-	
+
 	public void move() {
-		
-		_x += _velX;
-		_y += _velY;
+
+		x += velX;
+		y += velY;
 	}
-	
+
 	public void jump() {
-		
-//		setVelX(2);
+
+		// setVelX(2);
 		setVelY(-40);
-			
+
 	}
-	
+
 	public void fall() {
-		
+
 		setVelY(gravity);
 	}
-	
+
 	public void setX(int x) {
-		
-		this._x = x;
+
+		this.x = x;
 	}
-	
+
 	public int randomNumber(int range) {
-		
+
 		Random rand = new Random();
+
 		int random = rand.nextInt(range);
-		if(random == 0) {
+		if (random == 0) {
 			random++;
 		}
 		return random;
 	}
-	
+
 	public void setY(int y) {
-		this._y = y;
+		this.y = y;
 	}
-	
+
 	public int getX() {
-		return _x;
+		return x;
 	}
-	
+
 	public int getY() {
-		return _y;
+		return y;
 	}
-	
+
 	public void setID(ID id) {
-		this._id = id;
+		this.id = id;
 	}
-	
+
 	public ID getID() {
-		return _id;
+		return id;
 	}
-	
+
 	public double getVelX() {
-		return _velX;
+		return velX;
 	}
-	
+
 	public double getVelY() {
-		return _velY;
+		return velY;
 	}
-	
+
 	public void setVelX(double x) {
-		this._velX = x;
+		this.velX = x;
 	}
-	
+
 	public void setVelY(double y) {
-		this._velY = y;
+		this.velY = y;
 	}
 
 	public int getWidth() {
-		return _width;
+		return width;
 	}
 
 	public int getHeight() {
-		return _height;
+		return height;
 	}
-	
+
 	public void setWidth(int width) {
-		this._width = width;
+		this.width = width;
 	}
-	
+
 	public void setHeight(int height) {
-		this._height = height;
+		this.height = height;
 	}
 }

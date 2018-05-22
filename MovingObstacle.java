@@ -1,17 +1,19 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class StaticObstacle extends GameObject {
+public class MovingObstacle extends GameObject {
 
-	public StaticObstacle(int x, int y, int width, int height, ID id) {
-
+	public MovingObstacle(int x, int y, int width, int height, ID id) {
+		
 		super(x, y, width, height, id);
-
 	}
 
 	@Override
 	public void update() {
-		
+
+		move();
+
+		setVelX(-2);
 	}
 
 	@Override
@@ -28,8 +30,6 @@ public class StaticObstacle extends GameObject {
 
 	@Override
 	public void doCollision() {
-
-		// System.out.println("Static Obstacle colliding...");
 
 		collided = true;
 	}

@@ -4,141 +4,144 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
-	public static final int _width = 1280;
-	public static final int _height = 800;
-	
-	private Thread _thread;
-	private boolean _running = false;
-	
-	private Handler _handler;
-	
+
+	public static final int width = 1280;
+	public static final int height = 800;
+
+	private Thread thread;
+	private boolean running = false;
+
+	private Handler handler;
+
 	public Game() {
-	
-		new Window(_width, _height, "Dodge!", this);
-		_handler = new Handler();
-		this.addKeyListener(new KeyInput(_handler));
+
+		new Window(width, height, "Dodge!", this);
+		handler = new Handler();
+		this.addKeyListener(new KeyInput(handler));
 
 		// Spawn objects (Player, obstacles)
-		spawnStaticObstacles();
 		spawnPlayer();
-		spawnMovingObstacles1();
+		spawnStaticObstacles();
+		spawnMovingObstacles();
 	}
-	
+
 	public void spawnStaticObstacles() {
-		
+
 		// Ground
-		_handler.addObject(new StaticObstacle(0, 700, 1280, 100, ID.StaticObstacleType1));
+		handler.addObject(new StaticObstacle(0, 700, 1280, 100, ID.StaticObstaclesType1));
 	}
-	
-	public void spawnMovingObstacles1() {
-		
-		// TODO 
-		
-		// Obstacles
-		for(int i = 800; i < 10000; i = i + 400) {
-			
-			_handler.addObject(new MovingObstacleType1(i, 400, 100, 300, ID.MovingObstacleType1));
+
+	public void spawnMovingObstacles() {
+
+		// TODO
+
+		for (int i = 800; i < 10000; i = i + 400) {
+
+			handler.addObject(new MovingObstacle(i, 400, 100, 300, ID.MovingObstacleType1));
 		}
-		
-		for(int i = 800; i < 10000; i = i + 400) {
-			
-			_handler.addObject(new MovingObstacleType1(i, 0, 100, 300, ID.MovingObstacleType1));
+
+		for (int i = 800; i < 10000; i = i + 400) {
+
+			handler.addObject(new MovingObstacle(i, 0, 100, 300, ID.MovingObstacleType1));
 		}
 	}
-	
+
 	public void spawnPlayer() {
-		
-		_handler.addObject(new Player(500, 600, 50, 50, ID.Player1));
+
+		handler.addObject(new Player(500, 600, 50, 50, ID.Player1));
+	}
+
+	private void update() {
+
+		handler.update();
+		handler.collisionDetection();
+
+	}
+
+	private void render() {
+
+		BufferStrategy bs = getBufferStrategy();
+
+		if (bs == null) {
+			createBufferStrategy(3);
+			return;
+		}
+
+		Graphics g = bs.getDrawGraphics();
+
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, width, height);
+
+		handler.render(g);
+
+		g.dispose();
+		bs.show();
+	}
+
+	public synchronized void start() {
+
+		running = true;
+
+		thread = new Thread(this);
+		thread.start();
+	}
+
+	public synchronized void stop() {
+
+		running = false;
+
+		try {
+			thread.join();
+
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void run() {
-		
+
 		this.requestFocus();
-		
+
 		long lastTime = System.nanoTime();
 		double amoutOfTicks = 60.0;
 		double ns = 1000000000 / amoutOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
 		int frames = 0;
-		
-		while(_running) {
-			
+
+		while (running) {
+
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
 			lastTime = now;
-			
-			while(delta >= 1) {
+
+			while (delta >= 1) {
 				update();
 				delta--;
 			}
-			
-			if(_running) {
+
+			if (running) {
 				render();
 				frames++;
 			}
-					
-			if(System.currentTimeMillis() - timer > 1000) {
+
+			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				System.out.println("FPS: " + frames);
+				// 60 fps
+				// System.out.println("FPS: " + frames);
 				frames = 0;
 			}
-			
+
 			try {
-				Thread.sleep(1000/60);
+				Thread.sleep(1000 / 60);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 		stop();
-	}
-
-	private void update() {
-		_handler.update();
-	}
-	
-	private void render() {
-		
-		BufferStrategy bs = getBufferStrategy();
-		if(bs == null) { 
-			createBufferStrategy(3);
-			return;
-		}
-		
-		Graphics g = bs.getDrawGraphics();
-		
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, _width, _height);
-		
-		_handler.render(g);
-		_handler.collisionDetection();
-		
-		g.dispose();
-		bs.show();
-	}
-
-	public synchronized void start() {
-		
-		_running = true;
-		
-		_thread = new Thread(this);
-		_thread.start();
-	}
-	
-	public synchronized void stop() {
-		
-		_running = false;
-		
-		try {
-			_thread.join();
-			
-		} catch (InterruptedException e) {
-			
-			e.printStackTrace();
-		}
 	}
 }
