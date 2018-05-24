@@ -25,6 +25,10 @@ public class Game extends Canvas implements Runnable {
 		spawnPlayer();
 		spawnStaticObstacles();
 		spawnMovingObstacles();
+		
+		// Test
+		Countdown countdown = new Countdown(25, 0, 1000l);
+		countdown.start();
 	}
 
 	public void spawnStaticObstacles() {
