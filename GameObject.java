@@ -24,8 +24,7 @@ public abstract class GameObject {
 		this.width = width;
 		this.height = height;
 
-		collided = false;
-		gravity = 2.5;
+ 		gravity = 2.5;
 	}
 
 	public abstract void update();
@@ -44,7 +43,6 @@ public abstract class GameObject {
 
 		// setVelX(2);
 		setVelY(-40);
-
 	}
 
 	public void fall() {
@@ -62,6 +60,7 @@ public abstract class GameObject {
 		Random rand = new Random();
 
 		int random = rand.nextInt(range);
+		
 		if (random == 0) {
 			random++;
 		}
@@ -118,5 +117,9 @@ public abstract class GameObject {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+	
+	public boolean hasCollided() {
+		return collided;
 	}
 }

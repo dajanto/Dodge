@@ -11,10 +11,10 @@ public class Countdown {
 		
 		this.countdown = countdown;
 		this.delay = delay;
-		this.period = period;
+		this.period = period; 
 	}
 	
-	public void start(){
+	public void start() {
 		         
 		Timer timer = new Timer("Timer");
 		
@@ -22,15 +22,21 @@ public class Countdown {
 	    	
 	        public void run() {
 
-	            if (countdown > 0) {
-	            	System.out.println(countdown);
-		            countdown--;
+	            if (countdown < 1000) {
+	            	
+		            countdown++;
+		            
 				} else {
-					System.out.println(countdown);
-	            	System.exit(0);
+					
+//	            	System.exit(0);
 				}
 	        }
 	    };
 	    timer.scheduleAtFixedRate(repeatedTask, delay, period);
 	}	
+	
+	public int getSeconds() {
+		
+		return countdown;
+	}
 }

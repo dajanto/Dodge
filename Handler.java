@@ -1,6 +1,8 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Handler {
 	
@@ -8,19 +10,28 @@ public class Handler {
 	LinkedList<GameObject> object = new LinkedList<GameObject>();
 	
 	// Only for collision detection
-	LinkedList<GameObject> obstacleObjects = new LinkedList<GameObject>();
-	LinkedList<GameObject> playerObjects = new LinkedList<GameObject>();
+	List<GameObject> obstacleObjects = new CopyOnWriteArrayList<GameObject>();
+	List<GameObject> playerObjects = new CopyOnWriteArrayList<GameObject>();
 
 	public void update() {
 
 		for (GameObject tempObject : object) {
+			
 			tempObject.update();
+			
+			// Remove old objects 
+			// TODO ConcurrentModificationException
+			if(tempObject.getX() < -800) {
+				
+				object.remove(tempObject);
+			}
 		}
 	}
 
 	public void render(Graphics g) {
 
 		for (GameObject tempObject : object) {
+			
 			tempObject.render(g);
 		}
 	}
@@ -41,6 +52,12 @@ public class Handler {
 
 					obstacleObject.doCollision();
 					playerObject.doCollision();
+					
+				} else {
+					
+					// Swap collided boolean again
+					obstacleObject.collided = false;
+					playerObject.collided = false;
 				}
 			}
 		}
