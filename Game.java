@@ -1,7 +1,11 @@
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Game extends Canvas implements Runnable {
 
@@ -12,12 +16,13 @@ public class Game extends Canvas implements Runnable {
 
 	private Thread thread;
 	private boolean running = false;
+	private Window window;
 
 	private Handler handler;
 
 	public Game() {
 
-		new Window(width, height, "Dodge!", this);
+		window = new Window(width, height, "Dodge!", this);
 		handler = new Handler();
 		this.addKeyListener(new KeyInput(handler));
 
@@ -25,64 +30,69 @@ public class Game extends Canvas implements Runnable {
 		spawnPlayer();
 		spawnStaticObstacles();
 		spawnMovingObstacles();
+		 
+		setUpGameConditions();
+	}
+	
+	public void setUpGameConditions() {
+
+		JLabel scoringLabel = window.getScoringLabel();
+		Countdown countdown = new Countdown(0, 0, 125);
+		countdown.start();
 		
-		// Test
-//		Countdown countdown = new Countdown(25, 0, 1000l);
-//		countdown.start();
-
-		Thread timerthread = new Thread() {
-
+		Thread gameconditions = new Thread() {
+			
+			@SuppressWarnings("deprecation")
 			public void run() {
 				
-				// Recommended 50
-				int life = 1000;
+				int life = 50;
+				
+				int score = 0;
+				int first = 0;
 				
 //				Not needed for win condition
-//				countdown.getSeconds() > 0
-				while(life > 0) {
+				while(life > 0) { 
 					
-//					FPS Countdown
-//					System.out.println(countdown.getSeconds());
+					showScore(life,score);
 					
-					boolean playercollided = handler.playerObjects.get(0).hasCollided(); 
-	
-					// Make moving obstacles move faster
-//					for (GameObject movingobstacle : handler.obstacleObjects) {
-//						
-//						if(movingobstacle.getID() == ID.MovingObstacleType1) {
-//							
-//
-//							movingobstacle.getVelX() = movingobstacle.getVelX() * 2;
-//						}
-//					}
+					boolean playercollided = handler.getPlayer(first).hasCollided(); 
 					
- 					// Win condition? 
+					// Scoring
+					score = createScore(countdown.getSeconds());
+					
+					// Win condition?       
 					if(playercollided) {
 						
 						life--;
-						
-						System.out.println("Careful! Only " + life + " left until you die!");
 					}
 					
+					// Loss
 					if (life <= 0) {
-						System.out.println("GAME OVER!");
-						System.exit(0); 
+						
+						thread.stop();
+						scoringLabel.setSize(width,height);
+						scoringLabel.setFont(new Font("Lucida Console", Font.BOLD, 80));
+						scoringLabel.setText("<html>You scored: " + score + "<br>Try better next time!</html>");
+//						System.exit(0);
 					}
-//					try {
-//
-//						this.currentThread().sleep(1000);
-//						
-//					} catch (InterruptedException e) {
-//						
-//						e.printStackTrace();
-//					}
 				}
  		    }
 		};
-		
-		timerthread.start();
+		gameconditions.start();
 	}
-
+	
+	private void showScore(int life, int score) {
+		
+		// HTML for two line JLabel
+		window.getScoringLabel().setText("<html>Life: " + life + "<br>Score: " + score + "</html>");
+	}
+	
+	private int createScore(int increase) {
+		
+		int score = 0;
+		return score = score + increase;
+	}
+	
 	public void spawnStaticObstacles() {
 
 		// Ground
@@ -129,6 +139,7 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, width, height);
 
+		// TODO Differ textures for players and obstacles
 		handler.render(g);
 
 		g.dispose();

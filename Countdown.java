@@ -4,8 +4,8 @@ import java.util.TimerTask;
 public class Countdown {
 	
 	private int countdown;
-	private long delay  = 1000L;
-	private long period = 1000L;
+	private long delay;
+	private long period;
 	
 	public Countdown(int countdown, long delay, long period) {
 		

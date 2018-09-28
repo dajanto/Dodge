@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class MainMenu {
 
@@ -30,7 +31,8 @@ public class MainMenu {
 				// TODO
 
 				game = new Game();
-				game.setVisible(true);
+				
+				// Close main menu
 				frame.dispose();
 			}
 		});
@@ -39,7 +41,8 @@ public class MainMenu {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				
+				// TODO
 			}
 		});
 

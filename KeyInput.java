@@ -31,19 +31,19 @@ public class KeyInput extends KeyAdapter {
 				// tempObject.setVelY(+30);
 				// }
 
-				if (key == KeyEvent.VK_A) {
-
-					// if(!tempObject.collided) {
-					tempObject.setVelX(-10);
-					// }
-				}
-
-				if (key == KeyEvent.VK_D) {
-
-					// if(!tempObject.collided) {
-					tempObject.setVelX(+10);
-					// }
-				}
+//				if (key == KeyEvent.VK_A) {
+//
+//					// if(!tempObject.collided) {
+//					tempObject.setVelX(-10);
+//					// }
+//				}
+//
+//				if (key == KeyEvent.VK_D) {
+//
+//					// if(!tempObject.collided) {
+//					tempObject.setVelX(+10);
+//					// }
+//				}
 			}
 		}
 	}

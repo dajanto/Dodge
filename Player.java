@@ -3,9 +3,12 @@ import java.awt.Graphics;
 
 public class Player extends GameObject {
 
+	private int life;
+	
 	public Player(int x, int y, int width, int height, ID id) {
 		
 		super(x, y, width, height, id);
+		
 	}
 
 	@Override

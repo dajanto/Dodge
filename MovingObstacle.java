@@ -3,22 +3,15 @@ import java.awt.Graphics;
 
 public class MovingObstacle extends GameObject {
 
-	Countdown countdown; 
-	
 	public MovingObstacle(int x, int y, int width, int height, ID id) {
 		
 		super(x, y, width, height, id);
-		
-		countdown = new Countdown(25, 1000, 1000l);
-		countdown.start();
 	}
 
 	@Override
 	public void update() {
 
 		move();
-
-		countdown.start();
 
 		// Get faster with time  
 //		Math.log(100)

@@ -1,13 +1,12 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Handler {
 	
 	// For Update and Render 
-	LinkedList<GameObject> object = new LinkedList<GameObject>();
+	List<GameObject> object = new CopyOnWriteArrayList<GameObject>();
 	
 	// Only for collision detection
 	List<GameObject> obstacleObjects = new CopyOnWriteArrayList<GameObject>();
@@ -15,19 +14,35 @@ public class Handler {
 
 	public void update() {
 
-		for (GameObject tempObject : object) {
+		for (GameObject tempObject : object) {  
 			
-			tempObject.update();
-			
-			// Remove old objects 
-			// TODO ConcurrentModificationException
+			// Remove if object is out of sight
 			if(tempObject.getX() < -800) {
 				
 				object.remove(tempObject);
-			}
+				
+				// TODO Win condition counting objects
+				// objects passed by player
+			} 
+			
+			tempObject.update();
+			
+//			tempObject.update();
+//			
+//			// Remove old objects 
+//			if(tempObject.getX() < -800) {
+//				System.out.println(object.size());
+//				object.remove(tempObject);
+//				System.out.println(object.size());
+//			} 
 		}
 	}
 
+	public GameObject getPlayer(int index) {
+		
+		return playerObjects.get(index);
+	}
+	
 	public void render(Graphics g) {
 
 		for (GameObject tempObject : object) {
