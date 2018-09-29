@@ -1,6 +1,6 @@
-import java.awt.Color;
 import java.awt.Graphics;
-import java.util.Random;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public abstract class GameObject {
 
@@ -12,8 +12,6 @@ public abstract class GameObject {
 	protected int height;
 	protected ID id;
 	protected boolean collided;
-	protected Color color;
-	protected int jumpheight = 100;
 	protected double gravity;
 
 	public GameObject(int x, int y, int width, int height, ID id) {
@@ -23,13 +21,13 @@ public abstract class GameObject {
 		this.id = id;
 		this.width = width;
 		this.height = height;
-
- 		gravity = 2.5;
+		
+ 		gravity = 3.5;
 	}
 
 	public abstract void update();
 
-	public abstract void render(Graphics g);
+	public abstract void render(Graphics g, Graphics2D g2d, BufferedImage bi);
 
 	public abstract void doCollision();
 
@@ -53,18 +51,6 @@ public abstract class GameObject {
 	public void setX(int x) {
 
 		this.x = x;
-	}
-
-	public int randomNumber(int range) {
-
-		Random rand = new Random();
-
-		int random = rand.nextInt(range);
-		
-		if (random == 0) {
-			random++;
-		}
-		return random;
 	}
 
 	public void setY(int y) {

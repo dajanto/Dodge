@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class MovingObstacle extends GameObject {
 
@@ -20,8 +22,8 @@ public class MovingObstacle extends GameObject {
 	}
 
 	@Override
-	public void render(Graphics g) {
-
+	public void render(Graphics g, Graphics2D g2d, BufferedImage bi) {
+		
 		g.setColor(Color.BLACK);
 		g.fillRect(x, y, getWidth(), getHeight());
 
@@ -30,10 +32,11 @@ public class MovingObstacle extends GameObject {
 			g.fillRect(x, y, getWidth(), getHeight());
 		}
 	}
-
+	
 	@Override
 	public void doCollision() {
 
 		collided = true;
 	}
+
 }

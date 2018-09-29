@@ -1,10 +1,11 @@
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.TexturePaint;
+import java.awt.image.BufferedImage;
 
 public class Player extends GameObject {
 
-	private int life;
-	
 	public Player(int x, int y, int width, int height, ID id) {
 		
 		super(x, y, width, height, id);
@@ -43,11 +44,31 @@ public class Player extends GameObject {
 	}
 
 	@Override
-	public void render(Graphics g) {
-
-		g.setColor(Color.BLACK);
-		// getHeight() - 1 --> no drawing for the extra collision pixel
-		g.fillRect(x, y, getWidth(), getHeight());
+	public void render(Graphics g, Graphics2D g2d, BufferedImage bi) {
+		
+		TexturePaint tp = new TexturePaint(bi, new Rectangle(this.getX(), this.getY(),this.getWidth(),this.getHeight()));
+		
+		g2d.setPaint(tp);
+		g2d.fillRect(this.getX(), this.getY(), getWidth(), getHeight());
+		
+//		String path = "player1.png";
+//		
+//		File file = new File(path);
+//		BufferedImage bi = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+//		
+//		try {
+//			
+//			bi = ImageIO.read(file);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		Graphics2D g2d = (Graphics2D) g;
+//		TexturePaint tp = new TexturePaint(bi, new Rectangle(this.getX(),this.getY(),this.getWidth(),this.getHeight()));
+//		g2d.setPaint(tp);
+//		g2d.fillRect(this.getX(),this.getY(), getWidth(), getHeight());
+		
+		
 	}
 
 	@Override

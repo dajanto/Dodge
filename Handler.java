@@ -1,14 +1,14 @@
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Handler {
 	
-	// For Update and Render 
 	List<GameObject> object = new CopyOnWriteArrayList<GameObject>();
 	
-	// Only for collision detection
 	List<GameObject> obstacleObjects = new CopyOnWriteArrayList<GameObject>();
 	List<GameObject> playerObjects = new CopyOnWriteArrayList<GameObject>();
 
@@ -27,14 +27,6 @@ public class Handler {
 			
 			tempObject.update();
 			
-//			tempObject.update();
-//			
-//			// Remove old objects 
-//			if(tempObject.getX() < -800) {
-//				System.out.println(object.size());
-//				object.remove(tempObject);
-//				System.out.println(object.size());
-//			} 
 		}
 	}
 
@@ -43,11 +35,11 @@ public class Handler {
 		return playerObjects.get(index);
 	}
 	
-	public void render(Graphics g) {
+	public void render(Graphics g, Graphics2D g2d, BufferedImage bi) {
 
 		for (GameObject tempObject : object) {
 			
-			tempObject.render(g);
+			tempObject.render(g,g2d,bi);
 		}
 	}
 
