@@ -1,6 +1,4 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class MovingObstacle extends GameObject {
@@ -22,15 +20,10 @@ public class MovingObstacle extends GameObject {
 	}
 
 	@Override
-	public void render(Graphics g, Graphics2D g2d, BufferedImage bi) {
-		
-		g.setColor(Color.BLACK);
-		g.fillRect(x, y, getWidth(), getHeight());
+	public void render(Graphics2D g2d, BufferedImage bi) {
 
-		if (collided) {
-			g.setColor(Color.RED);
-			g.fillRect(x, y, getWidth(), getHeight());
-		}
+	    // TODO Hindernisse ausschneiden
+		g2d.fillRect(this.getX(), this.getY(), getWidth(), getHeight());
 	}
 	
 	@Override

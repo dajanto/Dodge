@@ -27,7 +27,7 @@ public abstract class GameObject {
 
 	public abstract void update();
 
-	public abstract void render(Graphics g, Graphics2D g2d, BufferedImage bi);
+	public abstract void render(Graphics2D g2d, BufferedImage bi);
 
 	public abstract void doCollision();
 

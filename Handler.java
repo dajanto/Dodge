@@ -1,4 +1,3 @@
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -35,11 +34,11 @@ public class Handler {
 		return playerObjects.get(index);
 	}
 	
-	public void render(Graphics g, Graphics2D g2d, BufferedImage bi) {
+	public void render(Graphics2D g2d, BufferedImage bi) {
 
 		for (GameObject tempObject : object) {
 			
-			tempObject.render(g,g2d,bi);
+			tempObject.render(g2d,bi);
 		}
 	}
 

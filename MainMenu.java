@@ -58,7 +58,7 @@ public class MainMenu {
 
 	private void setGUIup() {
 
-		frame = new JFrame("Dodge!");
+			frame = new JFrame("Dodge!");
 		gridlayout = new GridLayout(3, 1);
 		playButton = new JButton("Play");
 		optionsButton = new JButton("Options");

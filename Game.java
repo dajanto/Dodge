@@ -3,8 +3,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.TexturePaint;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -12,10 +10,9 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import com.sun.javafx.geom.transform.GeneralTransform3D;
+// import com.sun.javafx.geom.transform.GeneralTransform3D;
 
 public class Game extends Canvas implements Runnable {
 
@@ -38,7 +35,6 @@ public class Game extends Canvas implements Runnable {
 
 		// Spawn objects (Player, obstacles)
 		spawnPlayer();
-		spawnStaticObstacles();
 		spawnMovingObstacles();
 		 
 		setUpGameConditions();
@@ -55,7 +51,7 @@ public class Game extends Canvas implements Runnable {
 			@SuppressWarnings("deprecation")
 			public void run() {
 				
-				int life = 10000000;
+				int life = 100;
 				
 				int score = 0;
 				int first = 0;
@@ -100,12 +96,6 @@ public class Game extends Canvas implements Runnable {
 		int score = 0;
 		return score = score + increase;
 	}
-	
-	public void spawnStaticObstacles() {
-
-		// Ground
-		handler.addObject(new StaticObstacle(0, 700, 1280, 100, ID.StaticObstaclesType1));
-	}
 
 	public void spawnMovingObstacles() {
 		
@@ -113,8 +103,8 @@ public class Game extends Canvas implements Runnable {
 		for (int x = 800; x < 10000; x = x + 400) {
 			
 			int randY = randomNumber(200);
-			int staticObstacleHeight = 100;
-			int height = this.getHeight() + randY - staticObstacleHeight;
+			int spawningObstacleHeight = 100;
+			int height = this.getHeight() + randY - spawningObstacleHeight;
 			
 			// upper
 			handler.addObject(new MovingObstacle(x, randY, 100, height, ID.MovingObstacleType1));
@@ -165,13 +155,19 @@ public class Game extends Canvas implements Runnable {
 		
 		String path = "textures.png";
 		File file = new File(path);
+
+		String pathSky = "sky.png";
+		File fileSky = new File(pathSky);
+
 		BufferedImage bi = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+		BufferedImage biSky = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
 		BufferStrategy bs = getBufferStrategy();
 		
 		try {
 			
 			bi = ImageIO.read(file);
-			
+			biSky = ImageIO.read(fileSky);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -182,15 +178,16 @@ public class Game extends Canvas implements Runnable {
 			createBufferStrategy(3);
 			return;
 		}
-		
+
 		Graphics g = bs.getDrawGraphics();
 		Graphics2D g2d = (Graphics2D) g;
 		
-		g.setColor(Color.yellow);
+		// g.setColor(Color.WHITE);
 		g.fillRect(0, 0, width, height);
 
-		
-		handler.render(g,g2d,bi);
+		// Mit Graphics g Objekt
+		// handler.render(g,g2d,bi);
+		handler.render(g2d,bi);
 
 		g.dispose();
 		bs.show();

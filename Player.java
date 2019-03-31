@@ -44,31 +44,15 @@ public class Player extends GameObject {
 	}
 
 	@Override
-	public void render(Graphics g, Graphics2D g2d, BufferedImage bi) {
-		
+	public void render(Graphics2D g2d, BufferedImage bi) {
+
+		// TODO Player ausschneiden
 		TexturePaint tp = new TexturePaint(bi, new Rectangle(this.getX(), this.getY(),this.getWidth(),this.getHeight()));
-		
+		// TexturePaint tp = new TexturePaint(bi, new Rectangle(this.getX(),this.getY(), 100,48));
+
 		g2d.setPaint(tp);
 		g2d.fillRect(this.getX(), this.getY(), getWidth(), getHeight());
-		
-//		String path = "player1.png";
-//		
-//		File file = new File(path);
-//		BufferedImage bi = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
-//		
-//		try {
-//			
-//			bi = ImageIO.read(file);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//		Graphics2D g2d = (Graphics2D) g;
-//		TexturePaint tp = new TexturePaint(bi, new Rectangle(this.getX(),this.getY(),this.getWidth(),this.getHeight()));
-//		g2d.setPaint(tp);
-//		g2d.fillRect(this.getX(),this.getY(), getWidth(), getHeight());
-		
-		
+
 	}
 
 	@Override
