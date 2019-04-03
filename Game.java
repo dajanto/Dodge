@@ -35,7 +35,7 @@ public class Game extends Canvas implements Runnable {
 
 		// Spawn objects (Player, obstacles)
 		spawnPlayer();
-		spawnMovingObstacles();
+		// spawnMovingObstacles();
 		 
 		setUpGameConditions();
 	}
@@ -51,7 +51,7 @@ public class Game extends Canvas implements Runnable {
 			@SuppressWarnings("deprecation")
 			public void run() {
 				
-				int life = 100;
+				int life = 100000;
 				
 				int score = 0;
 				int first = 0;
@@ -141,7 +141,7 @@ public class Game extends Canvas implements Runnable {
 	
 	public void spawnPlayer() {
 
-		handler.addObject(new Player(500, 600, 50, 50, ID.Player1));
+		handler.addObject(new Player(500, 600, 100, 100, ID.Player1));
 	}
 
 	private void update() {
