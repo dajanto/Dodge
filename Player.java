@@ -5,8 +5,6 @@ import java.awt.Rectangle;
 import java.awt.TexturePaint;
 import java.awt.image.BufferedImage;
 
-import javafx.embed.swing.SwingFXUtils;
-
 public class Player extends GameObject {
 
 	public Player(int x, int y, int width, int height, ID id) {
@@ -67,8 +65,7 @@ public class Player extends GameObject {
 		// 48 100 geht nicht
 
 		g2d.setPaint(tp);
-		g2d.fillRect(this.getX(), this.getY(), 48, 100);
-//		g2d.drawImage(bi, this.getX(), this.getY(), 48, this.getHeight(), null);
+		g2d.fillRect(this.getX(), this.getY(), 32, 100);
 	}
 
 	

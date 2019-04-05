@@ -3,6 +3,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.TexturePaint;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -35,7 +38,7 @@ public class Game extends Canvas implements Runnable {
 
 		// Spawn objects (Player, obstacles)
 		spawnPlayer();
-		// spawnMovingObstacles();
+		spawnMovingObstacles();
 		 
 		setUpGameConditions();
 	}
@@ -51,7 +54,7 @@ public class Game extends Canvas implements Runnable {
 			@SuppressWarnings("deprecation")
 			public void run() {
 				
-				int life = 100000;
+				int life = 100;
 				
 				int score = 0;
 				int first = 0;
@@ -182,38 +185,14 @@ public class Game extends Canvas implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		Graphics2D g2d = (Graphics2D) g;
 		
-		// g.setColor(Color.WHITE);
-		g.fillRect(0, 0, width, height);
+		TexturePaint tp = new TexturePaint(biSky, new Rectangle(0,0,this.getWidth(),this.getHeight()));
+		g2d.setPaint(tp);
+		g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
 
-		// Mit Graphics g Objekt
-		// handler.render(g,g2d,bi);
 		handler.render(g2d,bi);
 
 		g.dispose();
 		bs.show();
-		
-		
-		// TODO Only read the file once for performance 
-//		BufferStrategy bs = getBufferStrategy();
-//		
-//		if (bs == null) {
-//			
-//			createBufferStrategy(3);
-//			return;
-//		}
-//
-//		Graphics g = bs.getDrawGraphics();
-//		
-//		g.setColor(Color.lightGray);
-//		g.fillRect(0, 0, width, height);
-//
-//		// TODO Differ textures for players and obstacles
-//		handler.render(g);
-//
-//		g.dispose();
-//		bs.show();
-		
-		
 		
 	}
 

@@ -22,8 +22,12 @@ public class MovingObstacle extends GameObject {
 	@Override
 	public void render(Graphics2D g2d, BufferedImage bi) {
 
-	    // TODO Hindernisse ausschneiden
-		g2d.fillRect(this.getX(), this.getY(), getWidth(), getHeight());
+		// TODO Hindernisse ausschneiden
+
+		TexturePaint tp = new TexturePaint(bi, new Rectangle(this.getX(), this.getY(),this.getWidth(),this.getHeight()));
+		g2d.setPaint(tp);
+//		g2d.fillRect(this.getX(), this.getY(), getWidth(), getHeight());
+		g2d.fillRect(this.getX() + 32, this.getY(), 35, this.getHeight());
 	}
 	
 	@Override

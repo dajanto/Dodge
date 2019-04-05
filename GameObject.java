@@ -22,7 +22,7 @@ public abstract class GameObject {
 		this.width = width;
 		this.height = height;
 		
- 		gravity = 3.5;
+ 		gravity = 4.5;
 	}
 
 	public abstract void update();
