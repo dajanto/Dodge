@@ -1,11 +1,9 @@
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.TexturePaint;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -36,9 +34,7 @@ public class Game extends Canvas implements Runnable {
 		handler = new Handler();
 		this.addKeyListener(new KeyInput(handler));
 
-		// Spawn objects (Player, obstacles)
 		spawnPlayer();
-//		spawnMovingObstacles();
 		 
 		setUpGameConditions();
 	}
@@ -63,15 +59,12 @@ public class Game extends Canvas implements Runnable {
 //				Not needed for win condition
 				while(life > 0) { 
 
-					// TODO Spawning without for loop?
-					spawnMovingObstacles();
-
-					showScore(life,score);
-					
 					boolean playercollided = handler.getPlayer(first).hasCollided(); 
-					
+
 					// Scoring
 					score = createScore(countdown.getSeconds());
+
+					showScore(life,score);
 					
 					if(playercollided) {
 						
@@ -90,6 +83,24 @@ public class Game extends Canvas implements Runnable {
  		    }
 		};
 		gameconditions.start();
+		
+		Thread spawning = new Thread() {
+
+			public void run() {
+				
+				while(true) {
+
+					// TODO Spawning without for loop 
+					spawnMovingObstacles();
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		spawning.start();
 	}
 	
 	private void showScore(int life, int score) {
