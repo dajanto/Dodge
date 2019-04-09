@@ -38,7 +38,7 @@ public class Game extends Canvas implements Runnable {
 
 		// Spawn objects (Player, obstacles)
 		spawnPlayer();
-		spawnMovingObstacles();
+//		spawnMovingObstacles();
 		 
 		setUpGameConditions();
 	}
@@ -54,14 +54,18 @@ public class Game extends Canvas implements Runnable {
 			@SuppressWarnings("deprecation")
 			public void run() {
 				
-				int life = 100;
+				// God mode
+				int life = Integer.MAX_VALUE;
 				
 				int score = 0;
 				int first = 0;
-				
+
 //				Not needed for win condition
 				while(life > 0) { 
-					
+
+					// TODO Spawning without for loop?
+					spawnMovingObstacles();
+
 					showScore(life,score);
 					
 					boolean playercollided = handler.getPlayer(first).hasCollided(); 
@@ -102,33 +106,26 @@ public class Game extends Canvas implements Runnable {
 
 	public void spawnMovingObstacles() {
 		
-		// TODO Spawning forever and random
-		for (int x = 800; x < 10000; x = x + 400) {
-			
-			int randY = randomNumber(200);
-			int spawningObstacleHeight = 100;
-			int height = this.getHeight() + randY - spawningObstacleHeight;
-			
-			// upper
-			handler.addObject(new MovingObstacle(x, randY, 100, height, ID.MovingObstacleType1));
-			
-			// lower
-//			handler.addObject(new MovingObstacle(x, 400,   , ID.MovingObstacleType1));
+		int randY = randomNumber(200);
+		int spawningObstacleHeight = 100;
+		int height = this.getHeight() + randY - spawningObstacleHeight;
+		handler.addObject(new MovingObstacle(800, randY, 100, height, ID.MovingObstacleType1));
 
-		}
-		
-//		// Old setup
-//		// TODO Spawning forever
-//		for (int i = 800; i < 10000; i = i + 400) {
-//
-//			handler.addObject(new MovingObstacle(i, 400, 100, 300, ID.MovingObstacleType1));
-//		}
-//
-//		for (int i = 800; i < 10000; i = i + 400) {
-//
-//			handler.addObject(new MovingObstacle(i, 0, 100, 300, ID.MovingObstacleType1));
-//		}
+//		// TODO Spawning forever and random
+//		for (int x = 800; x < 10000; x = x + 400) {
+//			
+//			int randY = randomNumber(200);
+//			int spawningObstacleHeight = 100;
+//			int height = this.getHeight() + randY - spawningObstacleHeight;
+//			
+//			// upper
+//			handler.addObject(new MovingObstacle(x, randY, 100, height, ID.MovingObstacleType1));
+//			
+//			// lower
+////			handler.addObject(new MovingObstacle(x, 400,   , ID.MovingObstacleType1));
+
 	}
+
 
 	public int randomNumber(int range) {
 
