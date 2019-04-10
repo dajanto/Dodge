@@ -13,13 +13,24 @@ public class KeyInput extends KeyAdapter {
 	public void keyPressed(KeyEvent e) {
 		
 		int key = e.getKeyCode();
-
-		// There is only one player at the moment so a loop is overkill
+		
 		GameObject player = handler.playerObjects.get(0);
 		
 		// Player Jump
 		if (key == KeyEvent.VK_SPACE) {
 			player.jump();
+		}
+
+		if (key == KeyEvent.VK_D) {
+
+			// TODO
+			player.setVelX(3);
+		}
+
+		if (key == KeyEvent.VK_A) {
+
+			// TODO
+			player.setVelX(-3);
 		}
 	}
 }

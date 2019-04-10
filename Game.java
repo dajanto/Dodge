@@ -50,8 +50,7 @@ public class Game extends Canvas implements Runnable {
 			@SuppressWarnings("deprecation")
 			public void run() {
 				
-				// God mode
-				int life = Integer.MAX_VALUE;
+				int life = 500;
 				
 				int score = 0;
 				int first = 0;
@@ -120,7 +119,7 @@ public class Game extends Canvas implements Runnable {
 		int randY = randomNumber(200);
 		int spawningObstacleHeight = 100;
 		int height = this.getHeight() + randY - spawningObstacleHeight;
-		handler.addObject(new MovingObstacle(800, randY, 100, height, ID.MovingObstacleType1));
+		handler.addObject(new MovingObstacle(this.getWidth() + 200, randY, 100, height, ID.MovingObstacleType1));
 
 //		// TODO Spawning forever and random
 //		for (int x = 800; x < 10000; x = x + 400) {
