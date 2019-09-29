@@ -19,8 +19,8 @@ public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final int width = 1280;
-	public static final int height = 800;
+	private static final int width = 1280;
+	private static final int height = 800;
 
 	private Thread thread;
 	private boolean running = false;
@@ -35,11 +35,10 @@ public class Game extends Canvas implements Runnable {
 		this.addKeyListener(new KeyInput(handler));
 
 		spawnPlayer();
-		 
 		setUpGameConditions();
 	}
 	
-	public void setUpGameConditions() {
+	private void setUpGameConditions() {
 
 		JLabel scoringLabel = window.getScoringLabel();
 		Countdown countdown = new Countdown(0, 0, 125);
@@ -50,43 +49,46 @@ public class Game extends Canvas implements Runnable {
 			@SuppressWarnings("deprecation")
 			public void run() {
 				
-				int life = 500;
-				
+				int life = 40;
 				int score = 0;
 				int first = 0;
 
 //				Not needed for win condition
 				while(life > 0) { 
 
-					boolean playercollided = handler.getPlayer(first).hasCollided(); 
+					boolean playerCollided = handler.getPlayer(first).hasCollided();
 
 					// Scoring
 					score = createScore(countdown.getSeconds());
 
 					showScore(life,score);
 					
-					if(playercollided) {
+					if(playerCollided) {
 						
 						life--;
 					}
 					
 					// Loss
 					if (life <= 0) {
-						
+
 						thread.stop();
 						scoringLabel.setSize(width,height);
 						scoringLabel.setFont(new Font("Lucida Console", Font.BOLD, 80));
 						scoringLabel.setText("<html>You scored: " + score + "<br>Try better next time!</html>");
+
+						// TODO Space -> MainMenu
 					}
 				}
  		    }
 		};
+		// TODO Performance improvements
 		gameconditions.start();
 		
 		Thread spawning = new Thread() {
 
 			public void run() {
-				
+
+				// TODO Spawn without thread, use Thread.sleep if needed
 				while(true) {
 
 					// TODO Spawning without for loop 
@@ -230,8 +232,8 @@ public class Game extends Canvas implements Runnable {
 		this.requestFocus();
 
 		long lastTime = System.nanoTime();
-		double amoutOfTicks = 60.0;
-		double ns = 1000000000 / amoutOfTicks;
+		double amountOfTicks = 60.0;
+		double ns = 1000000000 / amountOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
 		
