@@ -138,7 +138,6 @@ public class Game extends Canvas implements Runnable {
 
 	}
 
-
 	public int randomNumber(int range) {
 
 		Random rand = new Random();
@@ -184,7 +183,6 @@ public class Game extends Canvas implements Runnable {
 			e.printStackTrace();
 		}
 
-		
 		if (bs == null) {
 			
 			createBufferStrategy(3);
