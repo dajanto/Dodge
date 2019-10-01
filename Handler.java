@@ -13,19 +13,17 @@ public class Handler {
 
 	public void update() {
 
-		for (GameObject tempObject : object) {  
-			
+		for (GameObject tempObject : object) {
+
 			// Remove if object is out of sight
 			if(tempObject.getX() < -800) {
 				
 				object.remove(tempObject);
-				
-				// TODO Win condition counting objects
-				// objects passed by player
-			} 
+
+				// TODO Counter objects passed
+			}
 			
 			tempObject.update();
-			
 		}
 	}
 
@@ -56,14 +54,19 @@ public class Handler {
 				// Actual collision
 				if (player.intersects(obstacle)) {
 
+					System.out.println("player intersec obs");
+
 					obstacleObject.doCollision();
 					playerObject.doCollision();
-					
+
+					obstacleObject.setCollisionState(true);
+					playerObject.setCollisionState(true);
+
 				} else {
-					
+
 					// Swap collided boolean again
-					obstacleObject.collided = false;
-					playerObject.collided = false;
+					obstacleObject.setCollisionState(false);
+					playerObject.setCollisionState(false);
 				}
 			}
 		}

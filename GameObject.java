@@ -21,7 +21,7 @@ public abstract class GameObject {
 		this.id = id;
 		this.width = width;
 		this.height = height;
-		
+
  		gravity = 4.5;
 	}
 
@@ -110,5 +110,9 @@ public abstract class GameObject {
 	
 	public boolean hasCollided() {
 		return collided;
+	}
+
+	public void setCollisionState(boolean state) {
+		collided = state;
 	}
 }

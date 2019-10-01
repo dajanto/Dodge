@@ -68,7 +68,6 @@ public class Player extends GameObject {
 		g2d.fillRect(this.getX(), this.getY(), 32, 100);
 	}
 
-	
 	@Override
 	public void doCollision() {
 

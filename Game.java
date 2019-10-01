@@ -9,11 +9,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
-import javax.swing.JLabel;
-
-// import com.sun.javafx.geom.transform.GeneralTransform3D;
+import javax.swing.*;
 
 public class Game extends Canvas implements Runnable {
 
@@ -28,82 +27,27 @@ public class Game extends Canvas implements Runnable {
 
 	private Handler handler;
 
+	private Countdown countdown;
+	private int life;
+	private int ticks;
+
 	public Game() {
 
 		window = new Window(width, height, "Dodge!", this);
 		handler = new Handler();
 		this.addKeyListener(new KeyInput(handler));
+		countdown = new Countdown(0, 0, 125);
+		countdown.start();
 
 		spawnPlayer();
-		setUpGameConditions();
+
+		// Player life total
+		life = 500;
+
+		// Tick-Counter
+		ticks = 0;
 	}
-	
-	private void setUpGameConditions() {
 
-		JLabel scoringLabel = window.getScoringLabel();
-		Countdown countdown = new Countdown(0, 0, 125);
-		countdown.start();
-		
-		Thread gameconditions = new Thread() {
-			
-			@SuppressWarnings("deprecation")
-			public void run() {
-				
-				int life = 40;
-				int score = 0;
-				int first = 0;
-
-//				Not needed for win condition
-				while(life > 0) { 
-
-					boolean playerCollided = handler.getPlayer(first).hasCollided();
-
-					// Scoring
-					score = createScore(countdown.getSeconds());
-
-					showScore(life,score);
-					
-					if(playerCollided) {
-						
-						life--;
-					}
-					
-					// Loss
-					if (life <= 0) {
-
-						thread.stop();
-						scoringLabel.setSize(width,height);
-						scoringLabel.setFont(new Font("Lucida Console", Font.BOLD, 80));
-						scoringLabel.setText("<html>You scored: " + score + "<br>Try better next time!</html>");
-
-						// TODO Space -> MainMenu
-					}
-				}
- 		    }
-		};
-		// TODO Performance improvements
-		gameconditions.start();
-		
-		Thread spawning = new Thread() {
-
-			public void run() {
-
-				// TODO Spawn without thread, use Thread.sleep if needed
-				while(true) {
-
-					// TODO Spawning without for loop 
-					spawnMovingObstacles();
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		};
-		spawning.start();
-	}
-	
 	private void showScore(int life, int score) {
 		
 		// HTML for two line JLabel
@@ -116,29 +60,16 @@ public class Game extends Canvas implements Runnable {
 		return score = score + increase;
 	}
 
-	public void spawnMovingObstacles() {
-		
+	private void spawnMovingObstacles() {
+
 		int randY = randomNumber(200);
 		int spawningObstacleHeight = 100;
 		int height = this.getHeight() + randY - spawningObstacleHeight;
+
 		handler.addObject(new MovingObstacle(this.getWidth() + 200, randY, 100, height, ID.MovingObstacleType1));
-
-//		// TODO Spawning forever and random
-//		for (int x = 800; x < 10000; x = x + 400) {
-//			
-//			int randY = randomNumber(200);
-//			int spawningObstacleHeight = 100;
-//			int height = this.getHeight() + randY - spawningObstacleHeight;
-//			
-//			// upper
-//			handler.addObject(new MovingObstacle(x, randY, 100, height, ID.MovingObstacleType1));
-//			
-//			// lower
-////			handler.addObject(new MovingObstacle(x, 400,   , ID.MovingObstacleType1));
-
 	}
 
-	public int randomNumber(int range) {
+	private int randomNumber(int range) {
 
 		Random rand = new Random();
 
@@ -150,16 +81,59 @@ public class Game extends Canvas implements Runnable {
 		return random;
 	}
 	
-	public void spawnPlayer() {
+	private void spawnPlayer() {
 
 		handler.addObject(new Player(500, 600, 100, 100, ID.Player1));
 	}
 
 	private void update() {
 
-		handler.update();
-		handler.collisionDetection();
+		int score = 0;
+		int first = 0;
+		boolean playerCollided;
 
+        JLabel scoringLabel = window.getScoringLabel();
+
+		// Counting ticks
+		ticks++;
+
+		// Spawning regulation
+		// Spawn obstacle per 70 ticks
+		if(ticks >= 70) {
+			ticks = 0;
+			spawnMovingObstacles();
+		}
+
+		if (life > 0) {
+
+			// TODO playerCollided wird nicht true?!
+			playerCollided = handler.getPlayer(first).hasCollided();
+			System.out.println(playerCollided);
+
+			if (playerCollided) {
+				System.out.println("player collided, life decreasing!");
+
+				life--;
+			}
+
+			// Scoring
+			score = createScore(countdown.getSeconds());
+			showScore(life, score);
+
+			// Loss
+            if (life <= 0) {
+
+                //thread.stop();
+                scoringLabel.setSize(width, height);
+                scoringLabel.setFont(new Font("Lucida Console", Font.BOLD, 80));
+                scoringLabel.setText("<html>You scored: " + score + "<br>Try better next time!</html>");
+
+                // TODO Space -> MainMenu -> New Game
+            }
+		}
+
+		handler.update();
+        handler.collisionDetection();;
 	}
 
 	private void render() {
