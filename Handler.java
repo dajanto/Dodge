@@ -54,13 +54,11 @@ public class Handler {
 				// Actual collision
 				if (player.intersects(obstacle)) {
 
-					System.out.println("player intersec obs");
-
 					obstacleObject.doCollision();
 					playerObject.doCollision();
 
-					obstacleObject.setCollisionState(true);
-					playerObject.setCollisionState(true);
+					// TODO Workaround -> Methode neu schreiben wegen Falsifizierung der Collision
+					return;
 
 				} else {
 
