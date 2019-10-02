@@ -45,27 +45,9 @@ public class Player extends GameObject {
 	@Override
 	public void render(Graphics2D g2d, BufferedImage bi) {
 
-		// TODO Player richtig ausschneiden
-		TexturePaint tp = new TexturePaint(bi, new Rectangle(this.getX(), this.getY(),this.getWidth(),this.getHeight()));
-
-		// Debuggen der Playerkoordinaten
-//		System.out.println("X: " + this.getX());
-//		System.out.println("Y: "+ this.getY());
-//		System.out.println("Width: " + this.getWidth());
-//		System.out.println("Height: " + this.getHeight());
-//		System.out.println("              ");
-//		System.out.println("              ");
-//		System.out.println("              ");
-//		System.out.println("              ");
-//		System.out.println("              ");
-//		TexturePaint tp = new TexturePaint(bi, new Rectangle(this.getX(), this.getY(),this.getWidth(),this.getHeight()));
-//		TexturePaint tp = new TexturePaint(bi, new Rectangle(this.getX(), this.getY(),48,100));
-
-		// TODO Resize Image?	
-		// 48 100 geht nicht
-
+		TexturePaint tp = new TexturePaint(bi, new Rectangle(this.getX(), this.getY(), 144, 100));
 		g2d.setPaint(tp);
-		g2d.fillRect(this.getX(), this.getY(), 32, 100);
+		g2d.fillRect(this.getX(), this.getY(), 48, 100);
 	}
 
 	@Override
