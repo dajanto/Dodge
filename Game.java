@@ -28,7 +28,7 @@ public class Game extends Canvas implements Runnable {
 	private Handler handler;
 
 	private Countdown countdown;
-	private int life;
+	public int life;
 	private int ticks;
 
 	public Game() {
@@ -42,7 +42,7 @@ public class Game extends Canvas implements Runnable {
 		spawnPlayer();
 
 		// Player life total
-		life = 500;
+		life = 50;
 
 		// Tick-Counter
 		ticks = 0;
@@ -62,6 +62,7 @@ public class Game extends Canvas implements Runnable {
 
 	private void spawnMovingObstacles() {
 
+		// TODO In current state game is not beatable at all times
 		int randY = randomNumber(200);
 		int spawningObstacleHeight = 100;
 		int height = this.getHeight() + randY - spawningObstacleHeight;
@@ -99,20 +100,16 @@ public class Game extends Canvas implements Runnable {
 
 		// Spawning regulation
 		// Spawn obstacle per 70 ticks
-		if(ticks >= 70) {
+		if(ticks >= 100) {
 			ticks = 0;
 			spawnMovingObstacles();
 		}
 
 		if (life > 0) {
 
-			// TODO playerCollided wird nicht true?!
 			playerCollided = handler.getPlayer(first).hasCollided();
-			System.out.println(playerCollided);
 
 			if (playerCollided) {
-				System.out.println("player collided, life decreasing!");
-
 				life--;
 			}
 
@@ -123,14 +120,13 @@ public class Game extends Canvas implements Runnable {
 			// Loss
             if (life <= 0) {
 
-                //thread.stop();
                 scoringLabel.setSize(width, height);
                 scoringLabel.setFont(new Font("Lucida Console", Font.BOLD, 80));
                 scoringLabel.setText("<html>You scored: " + score + "<br>Try better next time!</html>");
 
                 // TODO Space -> MainMenu -> New Game
+				}
             }
-		}
 
 		handler.update();
         handler.collisionDetection();;
@@ -174,7 +170,6 @@ public class Game extends Canvas implements Runnable {
 
 		g.dispose();
 		bs.show();
-		
 	}
 
 	public synchronized void start() {

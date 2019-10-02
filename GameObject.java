@@ -39,11 +39,8 @@ public abstract class GameObject {
 
 	public void jump() {
 
-		// TODO Curve 
-			
 		// setVelX(2);
 		setVelY(-100);
-
 	}
 
 	public void fall() {

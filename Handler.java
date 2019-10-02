@@ -42,31 +42,26 @@ public class Handler {
 
 	public void collisionDetection() {
 
-		for (GameObject obstacleObject : obstacleObjects) {
+		boolean obstacleSpawned = !obstacleObjects.isEmpty();
 
-			for (GameObject playerObject : playerObjects) {
+		if(obstacleSpawned) {
+		    int first = 0;
+			GameObject nearestObstacle = obstacleObjects.get(first);
+			GameObject player = getPlayer(first);
 
-				Rectangle player = new Rectangle(playerObject.getX(), playerObject.getY(), playerObject.getWidth(),
-						playerObject.getHeight());
-				Rectangle obstacle = new Rectangle(obstacleObject.getX(), obstacleObject.getY(),
-						obstacleObject.getWidth(), obstacleObject.getHeight());
+			Rectangle playerRec = new Rectangle(player.getX(), player.getY(), player.getWidth(), player.getHeight());
+			Rectangle obstacleRec = new Rectangle(nearestObstacle.getX(), nearestObstacle.getY(), nearestObstacle.getWidth(), nearestObstacle.getHeight());
 
-				// Actual collision
-				if (player.intersects(obstacle)) {
+			if (playerRec.intersects(obstacleRec)) {
+				nearestObstacle.doCollision();
+				player.doCollision();
 
-					obstacleObject.doCollision();
-					playerObject.doCollision();
-
-					// TODO Workaround -> Methode neu schreiben wegen Falsifizierung der Collision
-					return;
-
-				} else {
-
-					// Swap collided boolean again
-					obstacleObject.setCollisionState(false);
-					playerObject.setCollisionState(false);
-				}
-			}
+			} else if(playerRec.intersects(obstacleRec) || player.getX() > obstacleRec.getX()) {
+				obstacleObjects.remove(first);
+                } else {
+                    nearestObstacle.setCollisionState(false);
+                    player.setCollisionState(false);
+                }
 		}
 	}
 
