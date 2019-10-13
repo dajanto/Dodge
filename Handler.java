@@ -78,6 +78,7 @@ public class Handler {
 		}
 	}
 
+	// TODO Unbenutzt
 	public void removeObject(GameObject object) {
 
 		this.object.remove(object);

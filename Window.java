@@ -8,10 +8,10 @@ public class Window extends Canvas {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel scoringLabel;
-	private JFrame frame;
- 	
+
 	public Window(int width, int height, String title, Game game) {
 
+        JFrame frame;
 		frame = new JFrame(title);
 		scoringLabel = new JLabel();
 //		grid = new GridLayout(1,2);
@@ -37,7 +37,6 @@ public class Window extends Canvas {
 	}
 	
 	public JLabel getScoringLabel() {
-		
 		return this.scoringLabel;
 	}
 }

@@ -20,7 +20,6 @@ public class KeyInput extends KeyAdapter {
 		if (key == KeyEvent.VK_SPACE) {
 			player.jump();
 		}
-
 		if (key == KeyEvent.VK_D) {
 
 			// TODO

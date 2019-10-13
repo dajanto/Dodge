@@ -28,7 +28,7 @@ public class Game extends Canvas implements Runnable {
 	private Handler handler;
 
 	private Countdown countdown;
-	public int life;
+	private int life;
 	private int ticks;
 
 	public Game() {
@@ -120,14 +120,19 @@ public class Game extends Canvas implements Runnable {
 			// Loss
             if (life <= 0) {
 
-                scoringLabel.setSize(width, height);
+				scoringLabel.setSize(width, height);
                 scoringLabel.setFont(new Font("Lucida Console", Font.BOLD, 80));
                 scoringLabel.setText("<html>You scored: " + score + "<br>Try better next time!</html>");
 
-                // TODO Space -> MainMenu -> New Game
+                // TODO Score-Window closen und MainMenu neu öffnen
+				// Google: Thread.interrupt?
+                thread.interrupt();
+				new MainMenu();
+				// Altes Game-Window closen
+				// Klassendiagramm aufstellen
+				//window.exit()
 				}
             }
-
 		handler.update();
         handler.collisionDetection();;
 	}
