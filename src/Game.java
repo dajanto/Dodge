@@ -139,10 +139,10 @@ public class Game extends Canvas implements Runnable {
 
 	private void render() {
 		
-		String path = "textures.png";
+		String path = "materials/textures.png";
 		File file = new File(path);
 
-		String pathSky = "sky.png";
+		String pathSky = "materials/sky.png";
 		File fileSky = new File(pathSky);
 
 		BufferedImage bi = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
