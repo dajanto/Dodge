@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="Dodge:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Dodge_jar</output-path>
-    <root id="archive" name="Dodge.jar">
-      <element id="module-output" name="Dodge" />
-    </root>
-  </artifact>
-</component>
